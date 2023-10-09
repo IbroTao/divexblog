@@ -10,6 +10,10 @@ const {
   addLike,
   removeLike,
   setViews,
+  getEducationalBlog,
+  getLatestBlog,
+  getSportsBlog,
+  getAllBlogs,
 } = require("../controllers/article.controllers");
 const router = Router();
 
@@ -23,6 +27,11 @@ router.post("/like/:id", authorizeUser, addLike);
 router.post("/unlike/:id", authorizeUser, removeLike);
 router.post("/views/:id", authorizeUser, setViews);
 router.put("/edit/:id", authorizeUser, editBlog);
+router.get("/", getAllBlogs);
+router.get("/educational", getEducationalBlog);
+router.get("/sports", getSportsBlog);
+router.get("/latest/:id", authorizeUser, getLatestBlog);
 router.get("/:id", getSingleBlog);
 router.delete("/delete/:id", deleteBlog);
+
 module.exports = router;
