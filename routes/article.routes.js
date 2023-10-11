@@ -14,6 +14,7 @@ const {
   getLatestBlog,
   getSportsBlog,
   getAllBlogs,
+  addComment,
 } = require("../controllers/article.controllers");
 const router = Router();
 
@@ -25,6 +26,7 @@ router.post(
 );
 router.post("/like/:id", authorizeUser, addLike);
 router.post("/unlike/:id", authorizeUser, removeLike);
+router.post("/comment/:id", authorizeUser, addComment);
 router.post("/views/:id", authorizeUser, setViews);
 router.put("/edit/:id", authorizeUser, editBlog);
 router.get("/", getAllBlogs);

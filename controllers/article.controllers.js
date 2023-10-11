@@ -1,4 +1,5 @@
 const { BLOG } = require("../models/blog.model");
+const { COMMENTS } = require("../models/comment.model");
 const { uploadToCloud } = require("../utilis/cloudinary");
 
 const createBlog = async (req, res) => {
@@ -87,6 +88,18 @@ const removeLike = async (req, res) => {
   } catch (e) {
     res.status(500).json(e);
   }
+};
+
+const addComment = async (req, res) => {
+  const result = await COMMENTS.create({
+    comments: {
+      text: req.body.text,
+      ids: [req.get("userAccess"), req.body.to],
+      sender: req.get("userAccess"),
+    },
+  });
+  if (!result) return res.status(400).json({ msg: "Failed!" });
+  res.status(201).json({ data: result });
 };
 
 const setViews = async (req, res) => {
@@ -223,6 +236,7 @@ module.exports = {
   deleteBlog,
   addLike,
   removeLike,
+  addComment,
   setViews,
   getMostLikedBlog,
   getMostViewedBlog,

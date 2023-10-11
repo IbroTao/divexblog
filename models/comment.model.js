@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const COMMENTS = mongoose.models(
+const COMMENTS = mongoose.model(
   "blog_comments",
   new mongoose.Schema({
     comments: {
